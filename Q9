@@ -1,0 +1,43 @@
+/*Define two classes ClassA and ClassB. 
+Make ClassB a friend class of ClassA so that it can access the private members of ClassA. 
+Demonstrate this using a suitable example. */
+
+
+#include <iostream>
+using namespace std;
+
+class ClassB; // forward declaration
+
+class ClassA {
+private:
+    int privateData;
+
+public:
+    ClassA(int val) {
+        privateData = val;
+    }
+
+    // Declare ClassB as a friend
+    friend class ClassB;
+};
+
+class ClassB {
+public:
+    void showData(ClassA a) {
+        // Accessing private member of ClassA
+        cout << "Private data of ClassA: " << a.privateData << endl;
+    }
+};
+
+int main() {
+    ClassA objA(100);
+    ClassB objB;
+
+    objB.showData(objA);
+
+    return 0;
+}
+
+/*OUTPUT
+Private data of ClassA: 100
+*/
