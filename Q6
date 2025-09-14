@@ -1,0 +1,65 @@
+/* Model a class BankAccount with the following: 
+Data members: accountNumber, accountHolderName, balance Methods: deposit(), withdraw(), display() 
+Use the concept of data hiding to restrict direct access to the balance. */
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BankAccount {
+private:
+    int accountNumber;
+    string accountHolderName;
+    double balance;   // kept private → data hiding
+
+public:
+    // Constructor
+    BankAccount(int accNo, string name, double bal = 0.0) {
+        accountNumber = accNo;
+        accountHolderName = name;
+        balance = bal;
+    }
+
+    // Method to deposit money
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposited: " << amount << endl;
+        } else {
+            cout << "Invalid deposit amount!" << endl;
+        }
+    }
+
+    // Method to withdraw money
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawn: " << amount << endl;
+        } else {
+            cout << "Insufficient balance or invalid amount!" << endl;
+        }
+    }
+
+    // Method to display account details
+    void display() {
+        cout << "\n--- Account Details ---" << endl;
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Account Holder: " << accountHolderName << endl;
+        cout << "Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    // Create object
+    BankAccount acc1(101, "Aditya", 1000);
+
+    acc1.display();
+    acc1.deposit(500);
+    acc1.withdraw(300);
+    acc1.display();
+
+    // ❌ Direct access not allowed (data hiding):
+    // acc1.balance = 100000;   // ERROR
+
+    return 0;
+}
