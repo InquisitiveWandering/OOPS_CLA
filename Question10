@@ -1,0 +1,51 @@
+//Define two classes, ClassX and ClassY, each having one private integer data member. 
+//Write a friend function add() that accesses both private members and prints their sum.
+
+#include <iostream>
+using namespace std;
+
+class ClassY; // forward declaration
+
+class ClassX {
+private:
+    int numX;
+
+public:
+    ClassX(int a) {
+        numX = a;
+    }
+
+    // Declare add() as friend
+    friend void add(ClassX, ClassY);
+};
+
+class ClassY {
+private:
+    int numY;
+
+public:
+    ClassY(int b) {
+        numY = b;
+    }
+
+    // Declare add() as friend
+    friend void add(ClassX, ClassY);
+};
+
+// Friend function definition
+void add(ClassX x, ClassY y) {
+    cout << "Sum = " << (x.numX + y.numY) << endl;
+}
+
+int main() {
+    ClassX objX(5);
+    ClassY objY(7);
+
+    add(objX, objY);
+
+    return 0;
+}
+
+/*Output
+Sum = 12
+*/
