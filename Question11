@@ -1,0 +1,39 @@
+/*Create a class ObjectCounter with:
+A static data member count to keep track of the number of objects created.
+A constructor that increments count each time an object is created.
+A static member function getCount() to display the value of count.
+Demonstrate the use of the class in main() by creating multiple objects and printing the total object count.
+*/
+
+
+#include <iostream>
+using namespace std;
+
+class ObjectCounter {
+private:
+    static int count;   // static data member
+
+public:
+    // Constructor increments count
+    ObjectCounter() {
+        count++;
+    }
+
+    // Static member function to display count
+    static void getCount() {
+        cout << "Total objects created: " << count << endl;
+    }
+};
+
+// Define static data member outside the class
+int ObjectCounter::count = 0;
+
+int main() {
+    ObjectCounter o1, o2;   // 2 objects created
+    ObjectCounter::getCount();
+
+    ObjectCounter o3;       // another object created
+    ObjectCounter::getCount();
+
+    return 0;
+}
