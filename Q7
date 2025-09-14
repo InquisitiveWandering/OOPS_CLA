@@ -1,0 +1,43 @@
+/* Demonstrate how to use private, protected, and public access modifiers in C++ to implement data hiding.*/
+
+
+#include <iostream>
+using namespace std;
+
+class Base {
+private:
+    int privateData;     // private
+protected:
+    int protectedData;   // protected
+public:
+    int publicData;      // public
+
+    Base() {
+        privateData = 10;
+        protectedData = 20;
+        publicData = 30;
+    }
+
+    int getPrivateData() {   // accessor for private
+        return privateData;
+    }
+};
+
+class Derived : public Base {
+public:
+    void showData() {
+        cout << "Protected Data (via derived): " << protectedData << endl;
+        cout << "Public Data (via derived): " << publicData << endl;
+    }
+};
+
+int main() {
+    Base b;
+    Derived d;
+
+    cout << "Private Data (via getter): " << b.getPrivateData() << endl;
+    cout << "Public Data (direct): " << b.publicData << endl;
+    d.showData();
+
+    return 0;
+}
