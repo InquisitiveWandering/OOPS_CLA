@@ -1,0 +1,63 @@
+/* Write a program with a class Employee that shows the use of:
+Default constructor
+Parameterized constructor
+Copy constructor */
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee {
+private:
+    int id;
+    string name;
+    double salary;
+
+public:
+    // 1. Default Constructor
+    Employee() {
+        id = 0;
+        name = "Not Assigned";
+        salary = 0.0;
+        cout << "Default Constructor called\n";
+    }
+
+    // 2. Parameterized Constructor
+    Employee(int i, string n, double s) {
+        id = i;
+        name = n;
+        salary = s;
+        cout << "Parameterized Constructor called\n";
+    }
+
+    // 3. Copy Constructor
+    Employee(const Employee &e) {
+        id = e.id;
+        name = e.name;
+        salary = e.salary;
+        cout << "Copy Constructor called\n";
+    }
+
+    // Display function
+    void display() {
+        cout << "ID: " << id
+             << ", Name: " << name
+             << ", Salary: " << salary << endl;
+    }
+};
+
+int main() {
+    // Using Default constructor
+    Employee e1;
+    e1.display();
+
+    // Using Parameterized constructor
+    Employee e2(101, "Aditya", 50000);
+    e2.display();
+
+    // Using Copy constructor
+    Employee e3(e2);
+    e3.display();
+
+    return 0;
+}
