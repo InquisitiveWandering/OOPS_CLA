@@ -37,3 +37,7 @@ int main() {
 
     return 0;
 }
+/*OUTPUT
+Total objects created: 2
+Total objects created: 3
+*/
