@@ -1,0 +1,51 @@
+/* Write a program to demonstrate creation of multiple objects of a class Book and access their data members. */
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    int bookID;
+    string title;
+    string author;
+
+public:
+    // Function to input book details
+    void inputDetails() {
+        cout << "Enter Book ID: ";
+        cin >> bookID;
+        cin.ignore(); // to clear leftover newline
+        cout << "Enter Title: ";
+        getline(cin, title);
+        cout << "Enter Author: ";
+        getline(cin, author);
+    }
+
+    // Function to display book details
+    void displayDetails() {
+        cout << "\n--- Book Details ---" << endl;
+        cout << "Book ID: " << bookID << endl;
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+    }
+};
+
+int main() {
+    // Create multiple objects
+    Book b1, b2;
+
+    cout << "Enter details of Book 1:\n";
+    b1.inputDetails();
+
+    cout << "\nEnter details of Book 2:\n";
+    b2.inputDetails();
+
+    // Display details
+    cout << "\nDisplaying details of both books:" << endl;
+    b1.displayDetails();
+    b2.displayDetails();
+
+    return 0;
+}
