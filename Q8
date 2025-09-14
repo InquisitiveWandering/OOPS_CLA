@@ -1,0 +1,54 @@
+/* Write a program to create a class Rectangle with a method that 
+takes another object of type Rectangle as a parameter and returns the rectangle with the area. */
+
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+    int length, breadth;
+
+public:
+    Rectangle(int l = 0, int b = 0) {
+        length = l;
+        breadth = b;
+    }
+
+    int area() {
+        return length * breadth;
+    }
+
+    // Method that takes another Rectangle and returns new Rectangle
+    Rectangle addArea(Rectangle r) {
+        int totalArea = this->area() + r.area();
+        // create a rectangle with length=totalArea and breadth=1
+        return Rectangle(totalArea, 1);
+    }
+
+    void display() {
+        cout << "Length: " << length 
+             << ", Breadth: " << breadth 
+             << ", Area: " << area() << endl;
+    }
+};
+
+int main() {
+    Rectangle r1(4, 5);
+    Rectangle r2(3, 6);
+
+    cout << "Rectangle 1: ";
+    r1.display();
+    cout << "Rectangle 2: ";
+    r2.display();
+
+    Rectangle r3 = r1.addArea(r2);
+    cout << "Rectangle after combining areas: ";
+    r3.display();
+
+    return 0;
+}
+
+/* Output
+Rectangle 1: Length: 4, Breadth: 5, Area: 20
+Rectangle 2: Length: 3, Breadth: 6, Area: 18
+Rectangle after combining areas: Length: 38, Breadth: 1, Area: 38
+*/
