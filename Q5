@@ -1,0 +1,68 @@
+/* Create a class Distance with feet and inches as data members. 
+Write a function that accepts an object of this class as an argument and returns a new Distance object after adding two distances. */
+
+
+#include <iostream>
+using namespace std;
+
+class Distance {
+private:
+    int feet;
+    int inches;
+
+public:
+    // Constructor
+    Distance(int f = 0, int i = 0) {
+        feet = f;
+        inches = i;
+        normalize();
+    }
+
+    // Function to normalize inches into feet
+    void normalize() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches = inches % 12;
+        }
+    }
+
+    // Function to input distance
+    void input() {
+        cout << "Enter feet: ";
+        cin >> feet;
+        cout << "Enter inches: ";
+        cin >> inches;
+        normalize();
+    }
+
+    // Function to display distance
+    void display() {
+        cout << feet << " feet " << inches << " inches" << endl;
+    }
+
+    // Function to add and return new Distance
+    Distance add(Distance d) {
+        Distance temp;
+        temp.feet = feet + d.feet;
+        temp.inches = inches + d.inches;
+        temp.normalize();
+        return temp;   // returning object
+    }
+};
+
+int main() {
+    Distance d1, d2, d3;
+
+    cout << "Enter first distance:\n";
+    d1.input();
+
+    cout << "Enter second distance:\n";
+    d2.input();
+
+    d3 = d1.add(d2);   // function returns new object
+
+    cout << "\nSum of distances = ";
+    d3.display();
+
+    return 0;
+}
