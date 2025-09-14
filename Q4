@@ -1,0 +1,42 @@
+/* Define a class Car with a constructor and a destructor. Show how constructor and destructor are called automatically. */
+
+
+#include <iostream>
+using namespace std;
+
+class Car {
+private:
+    string brand;
+
+public:
+    // Constructor
+    Car(string b) {
+        brand = b;
+        cout << "Constructor called: Car " << brand << " is created.\n";
+    }
+
+    // Destructor
+    ~Car() {
+        cout << "Destructor called: Car " << brand << " is destroyed.\n";
+    }
+
+    void show() {
+        cout << "Car brand: " << brand << endl;
+    }
+};
+
+int main() {
+    cout << "Entering main function...\n";
+
+    Car c1("Toyota");   // Constructor runs here
+    c1.show();
+
+    {
+        Car c2("BMW");  // Constructor runs here
+        c2.show();
+    } // c2 goes out of scope → Destructor runs automatically here
+
+    cout << "Exiting main function...\n";
+
+    return 0;  // c1 goes out of scope → Destructor runs automatically here
+}
