@@ -3,63 +3,43 @@ Data members: accountNumber, accountHolderName, balance Methods: deposit(), with
 Use the concept of data hiding to restrict direct access to the balance. */
 
 #include <iostream>
-#include <string>
 using namespace std;
 
 class BankAccount {
-private:
     int accountNumber;
     string accountHolderName;
-    double balance;   // kept private → data hiding
+    float balance;   // private for data hiding
 
 public:
-    // Constructor
-    BankAccount(int accNo, string name, double bal = 0.0) {
+    void setAccount(int accNo, string name, float bal) {
         accountNumber = accNo;
         accountHolderName = name;
         balance = bal;
     }
 
-    // Method to deposit money
-    void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
-            cout << "Deposited: " << amount << endl;
-        } else {
-            cout << "Invalid deposit amount!" << endl;
-        }
+    void deposit(float amount) {
+        balance += amount;
     }
 
-    // Method to withdraw money
-    void withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
+    void withdraw(float amount) {
+        if (amount <= balance)
             balance -= amount;
-            cout << "Withdrawn: " << amount << endl;
-        } else {
-            cout << "Insufficient balance or invalid amount!" << endl;
-        }
+        else
+            cout << "Insufficient balance!" << endl;
     }
 
-    // Method to display account details
     void display() {
-        cout << "\n--- Account Details ---" << endl;
-        cout << "Account Number: " << accountNumber << endl;
-        cout << "Account Holder: " << accountHolderName << endl;
+        cout << "Account No: " << accountNumber << endl;
+        cout << "Name: " << accountHolderName << endl;
         cout << "Balance: " << balance << endl;
     }
 };
 
 int main() {
-    // Create object
-    BankAccount acc1(101, "Aditya", 1000);
-
-    acc1.display();
-    acc1.deposit(500);
-    acc1.withdraw(300);
-    acc1.display();
-
-    // ❌ Direct access not allowed (data hiding):
-    // acc1.balance = 100000;   // ERROR
-
+    BankAccount b;
+    b.setAccount(1001, "Alice", 5000);
+    b.deposit(2000);
+    b.withdraw(1000);
+    b.display();
     return 0;
 }
