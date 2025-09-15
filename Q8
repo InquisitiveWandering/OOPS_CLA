@@ -17,38 +17,38 @@ public:
         return length * breadth;
     }
 
-    // Method that takes another Rectangle and returns new Rectangle
-    Rectangle addArea(Rectangle r) {
-        int totalArea = this->area() + r.area();
-        // create a rectangle with length=totalArea and breadth=1
-        return Rectangle(totalArea, 1);
+    // Method that takes another Rectangle object and returns the bigger one
+    Rectangle bigger(Rectangle r) {
+        if (this->area() >= r.area())
+            return *this;
+        else
+            return r;
     }
 
     void display() {
-        cout << "Length: " << length 
-             << ", Breadth: " << breadth 
+        cout << "Length: " << length << ", Breadth: " << breadth
              << ", Area: " << area() << endl;
     }
 };
 
 int main() {
-    Rectangle r1(4, 5);
-    Rectangle r2(3, 6);
+    Rectangle r1(10, 5), r2(7, 8);
 
     cout << "Rectangle 1: ";
     r1.display();
+
     cout << "Rectangle 2: ";
     r2.display();
 
-    Rectangle r3 = r1.addArea(r2);
-    cout << "Rectangle after combining areas: ";
+    Rectangle r3 = r1.bigger(r2); // get the bigger one
+    cout << "Bigger rectangle is: ";
     r3.display();
 
     return 0;
 }
 
 /* Output
-Rectangle 1: Length: 4, Breadth: 5, Area: 20
-Rectangle 2: Length: 3, Breadth: 6, Area: 18
-Rectangle after combining areas: Length: 38, Breadth: 1, Area: 38
+Rectangle 1: Length: 10, Breadth: 5, Area: 50
+Rectangle 2: Length: 7, Breadth: 8, Area: 56
+Bigger rectangle is: Length: 7, Breadth: 8, Area: 56
 */
