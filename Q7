@@ -1,51 +1,52 @@
 /* Demonstrate how to use private, protected, and public access modifiers in C++ to implement data hiding.*/
 
-
 #include <iostream>
 using namespace std;
 
 class Base {
 private:
-    int privateData;     // private
-protected:
-    int protectedData;   // protected
-public:
-    int publicData;      // public
+    int privateData;     // only inside Base
 
-    Base() {
-        privateData = 10;
-        protectedData = 20;
-        publicData = 30;
+protected:
+    int protectedData;   // inside Base + derived
+
+public:
+    int publicData;      // anywhere
+
+    void setData(int a, int b, int c) {
+        privateData = a;
+        protectedData = b;
+        publicData = c;
     }
 
-    int getPrivateData() {   // accessor for private
-        return privateData;
+    void showBase() {
+        cout << "Private: " << privateData << endl;
+        cout << "Protected: " << protectedData << endl;
+        cout << "Public: " << publicData << endl;
     }
 };
 
 class Derived : public Base {
 public:
-    void showData() {
-        cout << "Protected Data (via derived): " << protectedData << endl;
-        cout << "Public Data (via derived): " << publicData << endl;
+    void showDerived() {
+        // privateData ❌ not accessible
+        cout << "Protected (from Derived): " << protectedData << endl;
+        cout << "Public (from Derived): " << publicData << endl;
     }
 };
 
 int main() {
     Base b;
-    Derived d;
+    b.setData(10, 20, 30);
+    b.showBase();
 
-    cout << "Private Data (via getter): " << b.getPrivateData() << endl;
-    cout << "Public Data (direct): " << b.publicData << endl;
-    d.showData();
+    Derived d;
+    d.setData(100, 200, 300);  // uses Base function
+    d.showDerived();
+
+    d.publicData = 500;        // ✅ allowed (public)
+    // d.protectedData = 400;  // ❌ not allowed outside
+    d.showDerived();
 
     return 0;
 }
-/* Output
-
-Private Data (via getter): 10
-Public Data (direct): 30
-Protected Data (via derived): 20
-Public Data (via derived): 30
-
-*/
